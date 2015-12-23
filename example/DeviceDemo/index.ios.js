@@ -13,72 +13,94 @@ var {
   View,
 } = React;
 
-import JSDevice from 'react-native-device';
+import Device from 'react-native-device';
 
-const Device = React.NativeModules.Device;
+class DeviceInfo extends Component {
+  render() {
+    return (
+      <View>
+        <Text style={{fontSize: 16}}>Device Info</Text>
+        <Text>name: {this.props.name}</Text>
+        <Text>systemName: {this.props.systemName}</Text>
+        <Text>systemVersion: {this.props.systemVersion}</Text>
+        <Text>orientation: {this.props.orientation}</Text>
+        <Text>width,height: {this.props.width + ' x ' + this.props.height}</Text>
+      </View>
+    )
+  }
+}
 
-React.NativeAppEventEmitter.addListener('suspend', () => { console.log('suspend')});
-React.NativeAppEventEmitter.addListener('resume', () => { console.log('resume')});
-
+class PhonePortrait extends Component {
+  render() {
+    return <View style={styles.custom}><Text>PhonePortrait</Text></View>
+  }
+}
+class PhoneLandscape extends Component {
+  render() {
+    return <View style={styles.custom}><Text>PhoneLandscape</Text></View>
+  }
+}
+class TabletPortrait extends Component {
+  render() {
+    return <View style={styles.custom}><Text>TabletPortrait</Text></View>
+  }
+}
+class TabletLandscape extends Component {
+  render() {
+    return <View style={styles.custom}><Text>TabletLandscape</Text></View>
+  }
+}
 class DeviceDemo extends Component{
+  constructor(props, context) {
+    super(props, context);
+    this.state = {}
+  }
+
   componentDidMount() {
-    this.state = null
-    React.NativeAppEventEmitter.addListener('orientationchange', () => { 
-      Device.info((info) => {
-        console.log('orientationchange ' + info.orientation + ' ' + info.width + ' x ' + info.height)
-        console.dir(info)
-        this.setState(info)
-      });
+    React.DeviceEventEmitter.addListener('orientationchange', () => { 
+        console.log('orientationchange ' + Device.orientation + ' ' + Device.width + ' x ' + Device.height);
+        console.dir(Device);
+        this.setState(Object.assign({}, Device));
     });
-    Device.info((info) => {
-      console.log("info")
-      this.setState(info)
+    React.DeviceEventEmitter.addListener('deviceready', () => {
+        this.setState(Object.assign({}, Device))
     });
+
+    React.DeviceEventEmitter.addListener('suspend', () => { console.log('suspend')});
+    React.DeviceEventEmitter.addListener('resume', () => { console.log('resume')});
   }
 
   render() {
     console.log("render")
-    if (!this.state) {
-      return <View/>
+        return (
+          <View style={styles.container}>
+            <Text style={styles.welcome}>
+              Welcome to React Native!
+            </Text>
+            <DeviceInfo {...this.state}/>
+            {this.renderProfile()}
+          </View>
+        )
     }
-    switch (this.state.orientation) {
-      case 'Portrait':
-      case 'PortraitUpsideDown':
-        return (
-          <View style={styles.container}>
-            <Text style={styles.welcome}>
-              Welcome to React Native!
-            </Text>
-            <Text>{this.state.name}</Text>
-            <Text>{this.state.systemName + ' ' + this.state.systemVersion}</Text>
-            <Text>
-              {this.state.orientation + ' ' + this.state.width + ' x ' + this.state.height}
-            </Text>
-            <Text>Customized for Portrait</Text>
-          </View>
-        )
-      case 'Landscape':
-      case 'LandscapeLeft':
-      case 'LandscapeRight':
-        return (
-          <View style={styles.container}>
-            <Text style={styles.welcome}>
-              Welcome to React Native!
-            </Text>
-            <Text>{this.state.name}</Text>
-            <Text>{this.state.systemName + ' ' + this.state.systemVersion}</Text>
-            <Text>
-              {this.state.orientation + ' ' + this.state.width + ' x ' + this.state.height}
-            </Text>
-            <Text>Customized for Landscape</Text>
-          </View>
-        )
 
+    renderProfile() {
+      switch (this.state.orientation) {
+        case 'Portrait':
+        case 'PortraitUpsideDown':
+          return Device.userInterfaceIdiom === 'Phone' ? <PhonePortrait/> : <TabletPortrait/>;
+        case 'Landscape':
+        case 'LandscapeLeft':
+        case 'LandscapeRight':
+          return Device.userInterfaceIdiom === 'Phone' ? <PhoneLandscape/> : <TabletLandscape/>; 
+      }
     }
-  }
 }
 
 var styles = StyleSheet.create({
+  custom: {
+    borderWidth: 2,
+    padding: 5
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

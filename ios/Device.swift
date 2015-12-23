@@ -9,7 +9,7 @@ import UIKit
 
 extension AppDelegate {
     private func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
-        return Device._orientation
+        return Device._orientationMask
     }
 }
 
@@ -17,7 +17,7 @@ extension AppDelegate {
 class Device: NSObject {
     var bridge: RCTBridge!
 
-    static var _orientation = UIInterfaceOrientationMask.All
+    static var _orientationMask = UIInterfaceOrientationMask.All
 
     static func orientationMaskString(orientation: UIInterfaceOrientationMask) -> String {
         switch orientation {
@@ -148,7 +148,7 @@ class Device: NSObject {
                           "systemVersion": d.systemVersion,
                           "userInterfaceIdiom": Device.userInterfaceIdiom(d.userInterfaceIdiom),
                           "orientation": Device.orientationString(d.orientation),
-                          "orientationMask": Device.orientationMaskString(Device._orientation),
+                          "orientationMask": Device.orientationMaskString(Device._orientationMask),
                           "width": self.width(),
                           "height": self.height()
                       ]])
@@ -162,7 +162,7 @@ class Device: NSObject {
                           "systemVersion": d.systemVersion,
                           "userInterfaceIdiom": Device.userInterfaceIdiom(d.userInterfaceIdiom),
                           "orientation": Device.orientationString(d.orientation),
-                          "orientationMask": Device.orientationMaskString(Device._orientation),
+                          "orientationMask": Device.orientationMaskString(Device._orientationMask),
                           "width": 0,
                           "height": 0
                       ]])
@@ -172,22 +172,22 @@ class Device: NSObject {
     @objc func lockOrientation(orientation: String) {
         switch orientation.lowercaseString {
         case "portrait":
-            Device._orientation = .Portrait
+            Device._orientationMask = .Portrait
         case "landscape":
-            Device._orientation = .Landscape
+            Device._orientationMask = .Landscape
         case "landscapeleft":
-            Device._orientation = .LandscapeLeft
+            Device._orientationMask = .LandscapeLeft
         case "landscaperight":
-            Device._orientation = .LandscapeRight
+            Device._orientationMask = .LandscapeRight
         case "PortraitUpsideDown":
-            Device._orientation = .AllButUpsideDown
+            Device._orientationMask = .PortraitUpsideDown
         default:
-            Device._orientation = .All
+            Device._orientationMask = .All
         }
     }
 
     @objc func unlockOrientation() {
-        Device._orientation = .All
+        Device._orientationMask = .All
     }
 
     @available(iOS 8.0, *)
