@@ -4,9 +4,9 @@ var device = React.NativeModules.Device;
 
 class Device {
 	constructor() {
-		this.suspend = this.suspend.bind(this);
-		this.resume = this.resume.bind(this);
-		this.orientationChange = this.orientationChange.bind(this);
+		this.onSuspend = this.onSuspend.bind(this);
+		this.onResume = this.onResume.bind(this);
+		this.onOrientationChange = this.onOrientationChange.bind(this);
 		React.NativeAppEventEmitter.addListener('suspend', this.onSuspend);
 		React.NativeAppEventEmitter.addListener('resume', this.onResume);
 		React.NativeAppEventEmitter.addListener('orientationchange', this.onOrientationChange);
