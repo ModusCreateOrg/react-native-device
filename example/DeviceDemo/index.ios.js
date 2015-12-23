@@ -13,7 +13,7 @@ var {
   View,
 } = React;
 
-import Device from 'react-native-deivce';
+import Device from 'react-native-device';
 
 const Device = React.NativeModules.Device;
 

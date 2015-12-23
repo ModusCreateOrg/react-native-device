@@ -21,8 +21,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		6155B4851C2A014600EE54C5 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6155B4831C2A014600EE54C5 /* Device.swift */; };
-		6155B4861C2A014600EE54C5 /* DeviceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 6155B4841C2A014600EE54C5 /* DeviceBridge.m */; };
+		6121E3121C2B2D50002370E4 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6121E3101C2B2D50002370E4 /* Device.swift */; };
+		6121E3131C2B2D50002370E4 /* DeviceBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 6121E3111C2B2D50002370E4 /* DeviceBridge.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -126,9 +126,9 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DeviceDemo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DeviceDemo/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		6155B4821C2A014600EE54C5 /* Device-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Device-Bridging-Header.h"; path = "../../../Device-Bridging-Header.h"; sourceTree = "<group>"; };
-		6155B4831C2A014600EE54C5 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = ../../../Device.swift; sourceTree = "<group>"; };
-		6155B4841C2A014600EE54C5 /* DeviceBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceBridge.m; path = ../../../DeviceBridge.m; sourceTree = "<group>"; };
+		6121E30F1C2B2D50002370E4 /* Device-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Device-Bridging-Header.h"; path = "../node_modules/react-native-device/ios/Device-Bridging-Header.h"; sourceTree = "<group>"; };
+		6121E3101C2B2D50002370E4 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = "../node_modules/react-native-device/ios/Device.swift"; sourceTree = "<group>"; };
+		6121E3111C2B2D50002370E4 /* DeviceBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceBridge.m; path = "../node_modules/react-native-device/ios/DeviceBridge.m"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -237,9 +237,9 @@
 		13B07FAE1A68108700A75B9A /* DeviceDemo */ = {
 			isa = PBXGroup;
 			children = (
-				6155B4821C2A014600EE54C5 /* Device-Bridging-Header.h */,
-				6155B4831C2A014600EE54C5 /* Device.swift */,
-				6155B4841C2A014600EE54C5 /* DeviceBridge.m */,
+				6121E30F1C2B2D50002370E4 /* Device-Bridging-Header.h */,
+				6121E3101C2B2D50002370E4 /* Device.swift */,
+				6121E3111C2B2D50002370E4 /* DeviceBridge.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -551,9 +551,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6155B4851C2A014600EE54C5 /* Device.swift in Sources */,
+				6121E3121C2B2D50002370E4 /* Device.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				6155B4861C2A014600EE54C5 /* DeviceBridge.m in Sources */,
+				6121E3131C2B2D50002370E4 /* DeviceBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -633,7 +633,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = DeviceDemo;
-				SWIFT_OBJC_BRIDGING_HEADER = "../../../Device-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "../node_modules/react-native-device/ios/Device-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -652,7 +652,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = DeviceDemo;
-				SWIFT_OBJC_BRIDGING_HEADER = "../../../Device-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "../node_modules/react-native-device/ios/Device-Bridging-Header.h";
 			};
 			name = Release;
 		};

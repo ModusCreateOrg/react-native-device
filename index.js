@@ -22,7 +22,7 @@ class Device {
 	}
 
 	getInfo(callback) {
-		device.info((info) {
+		device.info((info) => {
 			Object.assign(this, info);
 			callback();
 		});
