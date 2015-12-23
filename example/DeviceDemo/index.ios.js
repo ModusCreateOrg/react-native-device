@@ -24,6 +24,7 @@ class DeviceInfo extends Component {
         <Text>systemName: {this.props.systemName}</Text>
         <Text>systemVersion: {this.props.systemVersion}</Text>
         <Text>orientation: {this.props.orientation}</Text>
+        <Text>orientationMask: {this.props.orientationMask}</Text>
         <Text>width,height: {this.props.width + ' x ' + this.props.height}</Text>
       </View>
     )

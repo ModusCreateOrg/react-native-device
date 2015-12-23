@@ -31,6 +31,14 @@ class Device {
 	onOrientationChange() {
 		this.getInfo(() => React.DeviceEventEmitter.emit('orientationchange'));
 	}
+
+	lockOrientation(orientation) {
+		device.lockOrientation(orientation)
+	}
+
+	unlockOrientation() {
+		device.unlockOrientation()
+	}
 }
 
 export default new Device()
