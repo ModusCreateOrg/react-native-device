@@ -7,37 +7,71 @@
 var React = require('react-native');
 var {
   AppRegistry,
+  Component,
   StyleSheet,
   Text,
   View,
 } = React;
 
 const Device = React.NativeModules.Device;
-React.NativeAppEventEmitter.addListener('orientationchange', () => { 
-  Device.info((info) => {
-    console.log('orientationchange ' + info.orientation + ' ' + info.width + ' x ' + info.height)
-    console.dir(info)
-  });
-});
 
-var DeviceDemo = React.createClass({
-  render: function() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
+class DeviceDemo extends Component{
+  componentDidMount() {
+    this.state = null
+    React.NativeAppEventEmitter.addListener('orientationchange', () => { 
+      Device.info((info) => {
+        console.log('orientationchange ' + info.orientation + ' ' + info.width + ' x ' + info.height)
+        console.dir(info)
+        this.setState(info)
+      });
+    });
+    Device.info((info) => {
+      console.log("info")
+      this.setState(info)
+    });
   }
-});
+
+  render() {
+    console.log("render")
+    if (!this.state) {
+      return <View/>
+    }
+    switch (this.state.orientation) {
+      case 'Portrait':
+      case 'PortraitUpsideDown':
+        return (
+          <View style={styles.container}>
+            <Text style={styles.welcome}>
+              Welcome to React Native!
+            </Text>
+            <Text>{this.state.name}</Text>
+            <Text>{this.state.systemName + ' ' + this.state.systemVersion}</Text>
+            <Text>
+              {this.state.orientation + ' ' + this.state.width + ' x ' + this.state.height}
+            </Text>
+            <Text>Customized for Portrait</Text>
+          </View>
+        )
+      case 'Landscape':
+      case 'LandscapeLeft':
+      case 'LandscapeRight':
+        return (
+          <View style={styles.container}>
+            <Text style={styles.welcome}>
+              Welcome to React Native!
+            </Text>
+            <Text>{this.state.name}</Text>
+            <Text>{this.state.systemName + ' ' + this.state.systemVersion}</Text>
+            <Text>
+              {this.state.orientation + ' ' + this.state.width + ' x ' + this.state.height}
+            </Text>
+            <Text>Customized for Landscape</Text>
+          </View>
+        )
+
+    }
+  }
+}
 
 var styles = StyleSheet.create({
   container: {

@@ -73,8 +73,22 @@ class Device : NSObject {
     }
     
     @objc func info(callback: (NSObject) -> ()) -> Void {
-        let d = UIDevice.currentDevice()
-        
+      let d = UIDevice.currentDevice()
+      
+      // TODO in progress: determine specific device details (e.g. iPhone 5, iPad 2, etc.)
+      var systemInfo = utsname()
+      uname(&systemInfo)
+      
+      let machine = systemInfo.release
+      let mirror = Mirror(reflecting: machine)
+      var identifier = ""
+      
+      for child in mirror.children {
+        if let value = child.value as? Int8 where value != 0 {
+          identifier.append(UnicodeScalar(UInt8(value)))
+        }
+      }
+      
         if #available(iOS 8.0, *) {
             callback([[
                 "name": d.name,
@@ -88,7 +102,8 @@ class Device : NSObject {
                 "width": self.width(),
                 "height": self.height()
             ]])
-        } else {
+        }
+        else {
             callback([[
                 "name": d.name,
                 "model": d.model,
