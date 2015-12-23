@@ -13,7 +13,12 @@ var {
   View,
 } = React;
 
+import Device from 'react-native-deivce';
+
 const Device = React.NativeModules.Device;
+
+React.NativeAppEventEmitter.addListener('suspend', () => { console.log('suspend')});
+React.NativeAppEventEmitter.addListener('resume', () => { console.log('resume')});
 
 class DeviceDemo extends Component{
   componentDidMount() {
