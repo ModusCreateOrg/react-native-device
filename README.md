@@ -7,6 +7,14 @@ Note: Currently for iOS only.
 
 The purpose of this module is to provide some basic but important features for React Native, that are not provided by React Native proper, in a neat package.  The module is inspired the Device singleton in the browser/JavaScript.  It provides events for orientation change (TODO: suspend/resume, too) as well as methods for locking the display orientation (e.g. Portrait only) and for obtaining information about the device (screen width & height, curent orientation, device model, etc.).
 
+## Installation
+
+In Xcode, right click on your project sources and select "Add files..."  In the open file dialog, add three files from react-native-device:
+
+* Device-Bridging-Header.h
+* Device.swift
+* DeviceBridge.m
+
 ## Use
 
 ```javascript
