@@ -1,5 +1,6 @@
-# react-native-device
-_React Native Device Module_
+# React Native Device Module
+
+Orientation methods & events plus device information.
 
 Note: Currently for iOS only.
 
