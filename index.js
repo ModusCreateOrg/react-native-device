@@ -10,6 +10,8 @@ class Device {
 		this.onSuspend = this.onSuspend.bind(this);
 		this.onResume = this.onResume.bind(this);
 		this.onOrientationChange = this.onOrientationChange.bind(this);
+		this.lockOrientation = this.lockOrientation.bind(this);
+		this.unlockOrientation = this.unlockOrientation.bind(this);
 		React.NativeAppEventEmitter.addListener('suspend', this.onSuspend);
 		React.NativeAppEventEmitter.addListener('resume', this.onResume);
 		React.NativeAppEventEmitter.addListener('orientationchange', this.onOrientationChange);
