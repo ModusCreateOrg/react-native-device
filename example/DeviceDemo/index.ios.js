@@ -11,14 +11,16 @@ var {
   StyleSheet,
   Text,
   View,
+  SegmentedControlIOS,
 } = React;
 
 import Device from 'react-native-device';
 
+console.dir(Device)
 class DeviceInfo extends Component {
   render() {
     return (
-      <View>
+      <View style={{borderWidth: 1, padding: 5, marginBottom: 10}}>
         <Text style={{fontSize: 16}}>Device Info</Text>
         <Text>name: {this.props.name}</Text>
         <Text>systemName: {this.props.systemName}</Text>
@@ -31,9 +33,63 @@ class DeviceInfo extends Component {
   }
 }
 
+class RotationLockControl extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      selectedIndex: 0,
+    };
+    this.onValueChange = this.onValueChange.bind(this);
+  }
+  render() {
+    return (
+      <View style={{marginTop: 10, marginBottom: 10}}>
+        <Text>Lock Orientation:</Text>
+        <SegmentedControlIOS 
+          style={{flex: 1}}
+          selectedIndex={this.state.selectedIndex}
+          values={["None", "Portrait", "LandscapeLeft", "LandscapeRight"]}
+          onValueChange={this.onValueChange}
+        />
+      </View>
+    );
+  }
+  onValueChange(value) {
+    switch (value) {
+      case 'Portrait':
+        React.NativeModules.Device.lockOrientation('Portrait')
+        // Device.lockOrientation('Portrait');
+        this.setState({
+          selectedIndex: 1
+        });
+        break;
+      case 'LandscapeLeft':
+        Device.lockOrientation('LandscapeLeft');
+        this.setState({
+          selectedIndex: 2
+        });
+        break;
+      case 'LandscapeRight':
+        Device.lockOrientation('LandscapeRight');
+        this.setState({
+          selectedIndex: 3
+        });
+      default:
+        Device.unlockOrientation();
+        this.setState({
+          selectedIndex: 0
+        });
+        break;
+    }
+  }
+}
+
 class PhonePortrait extends Component {
   render() {
     return <View style={styles.custom}><Text>PhonePortrait</Text></View>
+  }
+  onChange() {
+
   }
 }
 class PhoneLandscape extends Component {
@@ -76,10 +132,11 @@ class DeviceDemo extends Component{
         return (
           <View style={styles.container}>
             <Text style={styles.welcome}>
-              Welcome to React Native!
+              react-native-device Demo
             </Text>
-            <DeviceInfo {...this.state}/>
             {this.renderProfile()}
+            <RotationLockControl/>
+            <DeviceInfo {...this.state}/>
           </View>
         )
     }
@@ -103,12 +160,14 @@ var styles = StyleSheet.create({
     padding: 5
   },
   container: {
+    padding: 5,
+    // justifyContent: 'center',
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
+    marginTop: 40,
+    alignItems: 'center',
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
