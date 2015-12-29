@@ -60,8 +60,6 @@ Device.lockOrientation(orientation)
 
 Device.unlockOrientation()
 
-// Device provides a single asynchronous method to query for information about the device:
-
 ```
 
 ## Use (Native module)
@@ -112,7 +110,7 @@ Device.info(callback: function(info: object));
 // width: 736 
 ```
 
-See the DeviceDemo application in the ios/example directory.
+See the demo application in the example directory.
 
 ## License
 
