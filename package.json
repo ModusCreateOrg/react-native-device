@@ -1,0 +1,32 @@
+{
+  "name": "react-native-device",
+  "version": "0.0.1",
+  "description": "Rich device API for React Native apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-component",
+    "react-native",
+    "ios",
+    "orientation",
+    "suspend",
+    "resume",
+    "identify",
+    "android"
+  ],
+  "peerDependencies": {
+    "react-native": ">=0.5"
+  },
+  "author": "Michael Schwartz <mike@moduscreate.com.com> (github.com/ModusCreateOrg)",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ModusCreateOrg/react-native-device.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ModusCreateOrg/react-native-device/issues"
+  },
+  "homepage": "https://github.com/ModusCreateOrg/react-native-device"
+}
