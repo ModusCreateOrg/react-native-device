@@ -46,7 +46,21 @@ React.DeviceEventEmitter.addListener('deviceready', () => {
 	React.DeviceEventEmitter.addListener('resume', () => { console.log('resume')});
 });
 
-When Device fires an event, the properties values are valid within the event handler and until the next event.
+// When Device fires an event, the properties values are valid within the event handler and until the next event.
+
+// to force the application to render to a specific orientation:
+
+Device.lockOrientation(orientation)
+
+// orientation may be one of the following strings:
+// "Portrait" or "Landscape" or "Landscape" or "LandscapeLeft" or "LandscapeRight" 
+// or "PortraitUpsideDown"
+
+// to allow the application to render any orientation:
+
+Device.unlockOrientation()
+
+// Device provides a single asynchronous method to query for information about the device:
 
 ```
 
@@ -54,7 +68,7 @@ When Device fires an event, the properties values are valid within the event han
 
 ```javascript
 import React from 'react-native'
-let Device = React.NativeModules.Device
+let Device = React.NativeModules.MCDevice
 
 // to listen to app suspend and resume events:
 React.NativeAppEventEmitter.addListener('suspend', () => { console.log('suspend')});
