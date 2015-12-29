@@ -57,7 +57,7 @@ class RotationLockControl extends Component {
   onValueChange(value) {
     switch (value) {
       case 'Portrait':
-        React.NativeModules.Device.lockOrientation('Portrait')
+        React.NativeModules.MCDevice.lockOrientation('Portrait')
         // Device.lockOrientation('Portrait');
         this.setState({
           selectedIndex: 1

@@ -1,6 +1,6 @@
 import React from 'react-native';
 
-var device = React.NativeModules.Device;
+var device = React.NativeModules.MCDevice;
 
 class Device {
 	/**
