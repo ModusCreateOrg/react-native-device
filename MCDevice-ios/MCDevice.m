@@ -8,6 +8,7 @@
 @implementation AppDelegate (MCDevice)
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  NSLog(@"%d", [MCDevice getOrientationMask]);
     return [MCDevice getOrientationMask];
 }
 
@@ -126,8 +127,24 @@ static struct {
 } idioms[] = {
     { UIUserInterfaceIdiomUnspecified, @"Unspecified" },
     { UIUserInterfaceIdiomPhone, @"Phone" },
-    { UIUserInterfaceIdiomPad, @"∏ad" },
+    { UIUserInterfaceIdiomPad, @"pad" },
     { UIUserInterfaceIdiomTV, @"TV" },
+    {0, NULL}
+};
+
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+
+/**
+ * Table to map UIDeviceBatteryState to string
+ */
+static struct {
+  UIDeviceBatteryState value;
+  __unsafe_unretained  NSString *name;
+} batteryStates[] = {
+    { UIDeviceBatteryStateUnknown, @"Unknown" },
+    { UIDeviceBatteryStateUnplugged, @"Unplugged" },
+    { UIDeviceBatteryStateCharging, @"Charging" },
+    { UIDeviceBatteryStateFull, @"Full" },
     {0, NULL}
 };
 
@@ -156,7 +173,7 @@ static NSUInteger _orientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
     if (orientation) {      // not null
         for (int i = 0; masks[i].maskName; i++) {
             if ([masks[i].maskName caseInsensitiveCompare:orientation] == NSOrderedSame) {
-                _orientationMask = masks[i].maskValue;
+              [MCDevice setOrientationMask:masks[i].maskValue];
                 return;
             }
         }
@@ -209,6 +226,20 @@ static NSUInteger _orientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
     for (int i = 0; idioms[i].name; i++) {
         if (idioms[i].value == idiom) {
             return idioms[i].name;
+        }
+    }
+    return @"Unknown";
+}
+
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+
+/**
+ * Static return NSString representation of a UIDeviceBatteryState value.
+ */
++ (NSString *)batteryStateAsString:(UIDeviceBatteryState)state {
+    for (int i = 0; batteryStates[i].name; i++) {
+        if (batteryStates[i].value == state) {
+            return batteryStates[i].name;
         }
     }
     return @"Unknown";
@@ -332,7 +363,7 @@ RCT_EXPORT_METHOD(unlockOrientation) {
 //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 
 /**
- * getInfo(callback)
+ * info(callback)
  *
  * Gets information about the device, as a hash.
  *
@@ -351,7 +382,7 @@ RCT_EXPORT_METHOD(unlockOrientation) {
  * - width: 736
  *
  */
-RCT_EXPORT_METHOD(getInfo:(RCTResponseSenderBlock) callback) {
+RCT_EXPORT_METHOD(info:(RCTResponseSenderBlock) callback) {
     struct utsname systemInfo;
     uname(&systemInfo);
     NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
@@ -376,10 +407,10 @@ RCT_EXPORT_METHOD(getInfo:(RCTResponseSenderBlock) callback) {
             @"identifier" : identifier,
             @"name" : d.name,
             @"model" : d.model,
-            @"@localizedModel" : d.localizedModel,
-            @"@systemName" : d.systemName,
-            @"@systemVersion" : d.systemVersion,
-            @"userInterfaceIdiom" : [MCDevice userInterfaceIdiomAsString:d.userInterfaceIdiom]
+            @"localizedModel" : d.localizedModel,
+            @"systemName" : d.systemName,
+            @"systemVersion" : d.systemVersion,
+            @"userInterfaceIdiom" : [MCDevice userInterfaceIdiomAsString:d.userInterfaceIdiom],
         }
     ]);
 };

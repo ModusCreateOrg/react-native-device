@@ -12,13 +12,45 @@ Why implement suspend and resume when React Native already provides a similar fa
 
 ## Installation
 
-In Xcode, right click on your project sources and select "Add files..."  In the open file dialog, add three files from react-native-device:
+### iOS
 
-* Device-Bridging-Header.h
-* Device.swift
-* DeviceBridge.m
+In Xcode, right click on your project sources and select "Add files..."  In the open file dialog, select the MCDevice-ios folder from react-native-device.  Before clicking the add button, click the Options button and be sure "Create Groups" is selected.
 
-## Use
+
+## Use (JavaScript module)
+
+```javascript
+import Device from 'react-native-device';
+
+// Device will fire a deviceready event after it is asynchronously initialized.
+//
+// Device will have the following properties (only after deviceready event is fired):
+//
+// height: 414
+// identifier: "Simulator"  (might be iPhone 4, iPad Mini 2, etc.)
+// localizedModel: "iPhone"
+// model: "iPhone"
+// name: "iPhone Simulator"
+// orientation: "LandscapeLeft"
+// orientationMask: "All"
+// systemName: "iPhone OS"
+// systemVersion: "9.2"
+// userInterfaceIdiom: "Phone"
+// width: 736 
+
+React.DeviceEventEmitter.addListener('deviceready', () => {
+	React.DeviceEventEmitter.addListener('orientationchange', () => { 
+	    console.log('orientationchange ' + Device.orientation + ' ' + Device.width + ' x ' + Device.height);
+	});
+	React.DeviceEventEmitter.addListener('suspend', () => { console.log('suspend')});
+	React.DeviceEventEmitter.addListener('resume', () => { console.log('resume')});
+});
+
+When Device fires an event, the properties values are valid within the event handler and until the next event.
+
+```
+
+## Use (Native module)
 
 ```javascript
 import React from 'react-native'
